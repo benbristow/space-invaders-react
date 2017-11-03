@@ -1,9 +1,12 @@
+let playerSprite = require("../images/player.png");
+
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Body } from "react-game-kit";
 import { observer } from "mobx-react";
 
-let playerSprite = require("../images/player.png");
+import AbstractSprite from "./lib/AbstractSprite";
+import Config from "../config/base";
 
 @observer
 export default class Player extends Component {
@@ -34,11 +37,15 @@ export default class Player extends Component {
     let y = store.playerPosition.y;
 
     if (keys.isDown(keys.LEFT)) {
-      store.setPlayerPosition(x - 15, y);
+      store.setPlayerPosition(x - Config.game.player.speed, y);
     }
 
     if(keys.isDown(keys.RIGHT)) {
-      store.setPlayerPosition(x + 15, y);
+      store.setPlayerPosition(x + Config.game.player.speed, y);
+    }
+
+    if(keys.isDown(keys.SPACE)) {
+      store.fireBullet();
     }
   };
 
@@ -60,15 +67,15 @@ export default class Player extends Component {
   render() {
     return (
       <div style={this.getWrapperStyles()}>
-        <Body
-          args={[0, 32, 32, 32]}
-          ref={b => {
-            this.body = b;
-          }}
-        >
-          <img src={playerSprite} />
-        </Body>
-      </div>
+        <AbstractSprite
+          src={playerSprite}
+          tileHeight={Config.game.player.size}
+          tileWidth={Config.game.player.size}
+          offset={[0, 0]}
+          state={0}
+          steps={[0]}
+        />
+     </div>
     );
   }
 }

@@ -1,4 +1,14 @@
 "use strict";
 
-// Settings configured here will be merged into the final config object.
-export default {};
+export default {
+    game: {
+        player: {
+            size: 32,
+            speed: 15
+        },
+        bullet: {
+            size: 16,
+            speed: 48
+        }
+    }
+};
