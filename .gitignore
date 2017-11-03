@@ -33,3 +33,4 @@ bower_components/
 .idea
 
 dist
+.DS_Store

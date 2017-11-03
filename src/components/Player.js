@@ -2,7 +2,6 @@ let playerSprite = require("../images/player.png");
 
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Body } from "react-game-kit";
 import { observer } from "mobx-react";
 
 import AbstractSprite from "./lib/AbstractSprite";
