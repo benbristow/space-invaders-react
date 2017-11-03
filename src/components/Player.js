@@ -33,20 +33,9 @@ export default class Player extends Component {
 
   checkKeys = () => {
     const { keys, store } = this.props;
-    let x = store.playerPosition.x;
-    let y = store.playerPosition.y;
-
-    if (keys.isDown(keys.LEFT)) {
-      store.setPlayerPosition(x - Config.game.player.speed, y);
-    }
-
-    if(keys.isDown(keys.RIGHT)) {
-      store.setPlayerPosition(x + Config.game.player.speed, y);
-    }
-
-    if(keys.isDown(keys.SPACE)) {
-      store.fireBullet();
-    }
+    if (keys.isDown(keys.LEFT)) { store.movePlayerLeft(); }
+    if (keys.isDown(keys.RIGHT)) { store.movePlayerRight(); }
+    if (keys.isDown(keys.SPACE)) { store.resetBulletPosition(); }
   };
 
   update = () => {

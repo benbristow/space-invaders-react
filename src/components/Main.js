@@ -7,7 +7,7 @@ import { observer } from "mobx-react";
 
 import GameStore from "../stores/GameStore";
 import Player from "./Player";
-import Bullets from "./Bullets";
+import Bullet from "./Bullet";
 
 @observer
 export default class App extends Component {
@@ -29,8 +29,8 @@ export default class App extends Component {
         <Loop>
           <Stage width={window.innerWidth} height={window.innerHeight}>
             <World>
-              <Bullets store={GameStore} />
               <Player store={GameStore} keys={this.keyListener} />
+              <Bullet store={GameStore} />
             </World>
           </Stage>
         </Loop>

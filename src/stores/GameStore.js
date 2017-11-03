@@ -8,33 +8,49 @@ class GameStore {
     x: ((window.innerWidth / 100) * 35),
     y: ((window.innerHeight / 100) * 90 )
   }
+
+  @action
+  movePlayerLeft() {
+    if (this.playerPosition.x < 0) { return; }
+    let playerPosition = this.playerPosition
+    this.playerPosition = {
+      x: playerPosition.x - Config.game.player.speed,
+      y: playerPosition.y
+    };
+  }
+
+  @action
+  movePlayerRight() {
+    if (this.playerPosition.x > window.innerWidth - Config.game.player.size) { return; }
+    let playerPosition = this.playerPosition
+    this.playerPosition = {
+      x: playerPosition.x + Config.game.player.speed,
+      y: playerPosition.y
+    };
+  }
   
   @observable
-  bullets = []
+  bulletPosition = {
+    x: -Config.game.bullet.size,
+    y: -Config.game.bullet.size
+  }
 
   @action
-  setPlayerPosition(x, y) {
-    if (x < 0 || x >= window.innerWidth - Config.game.player.size) {
-      return;
-    }
-    this.playerPosition = { x: x, y: y };
+  moveBullet() {
+    this.bulletPosition = {
+      x: this.bulletPosition.x,
+      y: this.bulletPosition.y - Config.game.bullet.speed
+    };
   }
   
   @action
-  fireBullet() {
-    let bulletPosition = {
-      x: this.playerPosition.x + ((Config.game.player.size / 2) - Config.game.bullet.size / 2),
-      y: this.playerPosition.y - Config.game.player.size
+  resetBulletPosition() {
+    if(this.bulletPosition.y < 0) {
+      this.bulletPosition = {
+        x: this.playerPosition.x + ((Config.game.player.size / 2) - Config.game.bullet.size / 2),
+        y: this.playerPosition.y - (Config.game.player.size / 2)
+      }
     }
-    this.bullets.push(bulletPosition);
-  }
-
-  @action
-  moveBullets() {
-    this.bullets = this.bullets.filter(bullet => bullet.y > Config.game.bullet.size);
-    this.bullets.forEach((bullet, index) => {
-      this.bullets[index] = ({ x: bullet.x, y: bullet.y - Config.game.bullet.speed });
-    });
   }
 }
 
