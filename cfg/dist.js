@@ -2,6 +2,7 @@
 
 let path = require("path");
 let webpack = require("webpack");
+let ghpages = require("gh-pages");
 
 let baseConfig = require("./base");
 let defaultSettings = require("./defaults");
