@@ -58,7 +58,7 @@ function getDefaultModules() {
 
 module.exports = {
   srcPath: srcPath,
-  publicPath: "assets/",
+  publicPath: "/space-invaders-react/assets/",
   port: dfltPort,
   getDefaultModules: getDefaultModules
 };
