@@ -11,7 +11,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, "/../dist/assets"),
     filename: "app.js",
-    publicPath: "/space-invaders-react" + defaultSettings.publicPath
+    publicPath: defaultSettings.publicPath
   },
   devServer: {
     contentBase: "./src/",

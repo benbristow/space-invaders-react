@@ -52,6 +52,9 @@ class GameStore {
       }
     }
   }
+
+  @observable
+  aliens = [];
 }
 
 export default new GameStore();

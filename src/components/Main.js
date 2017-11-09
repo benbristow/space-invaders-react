@@ -5,9 +5,11 @@ import React, { Component } from "react";
 import { Loop, Stage, World, KeyListener } from "react-game-kit";
 import { observer } from "mobx-react";
 
-import GameStore from "../stores/GameStore";
+import Aliens from "./Aliens";
 import Player from "./Player";
 import Bullet from "./Bullet";
+
+import GameStore from "../stores/GameStore";
 
 @observer
 export default class App extends Component {
@@ -31,6 +33,7 @@ export default class App extends Component {
             <World>
               <Player store={GameStore} keys={this.keyListener} />
               <Bullet store={GameStore} />
+              <Aliens store={GameStore} />
             </World>
           </Stage>
         </Loop>

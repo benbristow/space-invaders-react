@@ -2,10 +2,10 @@ let bulletSprite = require("../images/bullet.png");
 
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import AbstractSprite from "./lib/AbstractSprite";
+import { observer } from "mobx-react";
 
 import Config from "../config/base";
-import { observer } from "mobx-react";
+import AbstractSprite from "./lib/AbstractSprite";
 
 @observer
 export default class Bullet extends Component {
