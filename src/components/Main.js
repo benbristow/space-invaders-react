@@ -34,6 +34,9 @@ export default class App extends Component {
               <Player store={GameStore} keys={this.keyListener} />
               <Bullet store={GameStore} />
               <Aliens store={GameStore} />
+              <div>
+                {GameStore.score}
+              </div>
             </World>
           </Stage>
         </Loop>

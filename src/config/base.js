@@ -7,12 +7,12 @@ export default {
             speed: 15
         },
         alien: {
-            size: 32,
-            speed: 15
+            size: 64,
+            speed: 5
         },
         bullet: {
             size: 16,
-            speed: 48
+            speed: 31
         }
     }
 };

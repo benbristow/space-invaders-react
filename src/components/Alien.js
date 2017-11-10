@@ -1,4 +1,4 @@
-let alienSprite = require("../images/player.png");
+let alienSprite = require("../images/alien.png");
 
 import React, { Component } from "react";
 import PropTypes from "prop-types";

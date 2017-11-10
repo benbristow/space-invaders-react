@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { observer } from "mobx-react";
+import checkPointIn from "check-point-in-rectangle";
 
 import Alien from "./Alien";
 import Config from "../config/base";
@@ -30,22 +31,41 @@ export default class Aliens extends Component {
 
   resetAliens() {
     this.props.store.aliens = [];
-
-    var screenWidth = window.innerWidth;
-    var aliensPerRow = Math.floor(screenWidth / Config.game.alien.size);
-
-    for(var x = 0; x < aliensPerRow; x++) {
-      this.props.store.aliens.push({ x: (Config.game.alien.size * i), y: 10 })
+    for(var y = 0; y <= 3; y++) {
+      for (var x = 0 + y; x <= 10; x++) {
+         this.props.store.aliens.push({ x: Config.game.alien.size * x, y: (Config.game.alien.size * y) });
+      }
     }
   }
 
-  checkCollisions = () => {
-    const { aliens, bulletPosition } = this.props.store;
+  dealWithColl = () => {
+    const { bulletPosition, aliens } = this.props.store;
+    var currentAlienCount = aliens.length;
+    var remainingAliens = aliens.filter((alien) => {
+      var bulletPositionPoint = [bulletPosition.x, bulletPosition.y];
+      var alienRect = [
+        [alien.x, alien.y],
+        [alien.x + Config.game.alien.size, alien.y],
+        [alien.x + Config.game.alien.size, alien.y + Config.game.alien.size],
+        [alien.x, alien.y + Config.game.alien.size]
+      ];
+      return !checkPointIn(bulletPositionPoint, alienRect);
+    });
+    var removedAlienCount = currentAlienCount - remainingAliens.length;
+    this.props.store.score += removedAlienCount;
+    this.props.store.aliens = remainingAliens;
+  }
 
+  checkWin() {
+    const { aliens } = this.props.store;
+    if(aliens.length == 0) {
+    }
   }
 
   update = () => {
-    this.checkCollisions();
+    this.dealWithColl();
+    this.checkWin();
+    this.props.store.moveAliens();
   }
 
   renderAliens = () => {

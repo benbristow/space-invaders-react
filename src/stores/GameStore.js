@@ -4,6 +4,9 @@ import Config from "../config/base";
 
 class GameStore {
   @observable
+  score = 0;
+
+  @observable
   playerPosition = {
     x: ((window.innerWidth / 100) * 35),
     y: ((window.innerHeight / 100) * 90 )
@@ -55,6 +58,16 @@ class GameStore {
 
   @observable
   aliens = [];
+  alienDirection = true; // true = right, false = left
+ 
+  @action
+  moveAliens() {
+    var screenWidth = window.innerWidth;
+    var overTheEdge = this.aliens.filter(alien => alien.x < 0 || alien.x > screenWidth - Config.game.alien.size);
+    if(overTheEdge.length > 0) { this.alienDirection = !this.alienDirection; }
+    this.aliens.forEach((alien) => { alien.x += this.alienDirection ? Config.game.alien.speed : -Config.game.alien.speed; });
+  }
 }
 
 export default new GameStore();
+ 
