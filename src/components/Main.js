@@ -14,6 +14,7 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.keyListener = new KeyListener();
+    GameStore.resetAll();
   }
 
   componentDidMount() {
@@ -28,10 +29,14 @@ export default class App extends Component {
     switch(GameStore.state) {
       case "alive":
         return (<Game store={GameStore} keyListener={this.keyListener} />);
-      case "dead":
-        return (<div>Dead</div>);
       case "won":
-        return (<div>A winner is you!</div>);
+        return (
+          <div className="won">
+            <h1>You win!</h1>
+            <p>You scored <strong>{GameStore.score}</strong> points</p>
+            <button onClick={() => GameStore.resetAll()}>Reset Game</button>
+          </div>
+        );
     }
   }
 }

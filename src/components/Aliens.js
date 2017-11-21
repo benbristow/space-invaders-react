@@ -22,20 +22,10 @@ export default class Aliens extends Component {
 
   componentDidMount() {
     this.context.loop.subscribe(this.update);
-    this.resetAliens();
   }
 
   componentWillUnmount() {
     this.context.loop.unsubscribe(this.update);
-  }
-
-  resetAliens() {
-    this.props.store.aliens = [];
-    for(var y = 0; y <= 2; y++) {
-      for (var x = 0 + y; x <= 10 - y; x++) {
-         this.props.store.aliens.push({ x: Config.game.alien.size * x, y: (Config.game.alien.size * y) });
-      }
-    }
   }
 
   dealWithCollision = () => {

@@ -7,7 +7,7 @@ class GameStore {
   score = 0;
 
   @observable
-  state = "alive";
+  state = "";
 
   @action
   win() {
@@ -15,10 +15,7 @@ class GameStore {
   }
 
   @observable
-  playerPosition = {
-    x: ((window.innerWidth / 100) * 35),
-    y: ((window.innerHeight / 100) * 90 )
-  }
+  playerPosition = {};
 
   @action
   movePlayerLeft() {
@@ -66,6 +63,8 @@ class GameStore {
 
   @observable
   aliens = [];
+
+  @observable
   alienDirection = true; // true = right, false = left
  
   @action
@@ -77,6 +76,24 @@ class GameStore {
       alien.x += this.alienDirection ? Config.game.alien.speed : -Config.game.alien.speed;
       return alien;
     });
+  }
+
+  @action
+  resetAliens() {
+    this.aliens = [];
+    for (var y = 0; y <= 2; y++) {
+      for (var x = 0 + y; x <= 10 - y; x++) {
+        this.aliens.push({ x: Config.game.alien.size * x, y: (Config.game.alien.size * y) });
+      }
+    }
+  }
+
+  @action
+  resetAll() {
+    this.score = 0;
+    this.state = "alive";
+    this.playerPosition = { x: ((window.innerWidth / 100) * 35), y: ((window.innerHeight / 100) * 90) }
+    this.resetAliens();
   }
 }
 

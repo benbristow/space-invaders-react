@@ -1,11 +1,12 @@
 html, body, #app {
-  background: black;
+  background: #000;
   color: white;
+  font-family: 'VT323', monospace;
+  font-size: 32px;
   height: 100vh;
-  width: 100vw;
   margin: 0;
   padding: 0;
-  font-family: 'VT323', monospace;
+  width: 100vw;
 }
 
 .score {
@@ -13,4 +14,13 @@ html, body, #app {
   top: 16px;
   left: 16px;
   font-size: 24px;
+}
+
+.won {
+  padding-top: 100px;
+  text-align: center;
+}
+
+.won h1 {
+  font-size: 64px;
 }
