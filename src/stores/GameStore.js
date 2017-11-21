@@ -7,6 +7,14 @@ class GameStore {
   score = 0;
 
   @observable
+  state = "alive";
+
+  @action
+  win() {
+    this.state = "won";
+  }
+
+  @observable
   playerPosition = {
     x: ((window.innerWidth / 100) * 35),
     y: ((window.innerHeight / 100) * 90 )
@@ -65,7 +73,10 @@ class GameStore {
     var screenWidth = window.innerWidth;
     var overTheEdge = this.aliens.filter(alien => alien.x < 0 || alien.x > screenWidth - Config.game.alien.size);
     if(overTheEdge.length > 0) { this.alienDirection = !this.alienDirection; }
-    this.aliens.forEach((alien) => { alien.x += this.alienDirection ? Config.game.alien.speed : -Config.game.alien.speed; });
+    this.aliens = this.aliens.map((alien) => {
+      alien.x += this.alienDirection ? Config.game.alien.speed : -Config.game.alien.speed;
+      return alien;
+    });
   }
 }
 

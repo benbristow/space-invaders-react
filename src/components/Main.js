@@ -1,15 +1,13 @@
-require("normalize.css")
+require("normalize.css");
 require("styles/App.css");
 
+
 import React, { Component } from "react";
-import { Loop, Stage, World, KeyListener } from "react-game-kit";
+import { KeyListener } from "react-game-kit";
 import { observer } from "mobx-react";
 
-import Aliens from "./Aliens";
-import Player from "./Player";
-import Bullet from "./Bullet";
-
 import GameStore from "../stores/GameStore";
+import Game from "./Game";
 
 @observer
 export default class App extends Component {
@@ -27,19 +25,13 @@ export default class App extends Component {
   }
 
   render() {
-    return (
-        <Loop>
-          <Stage width={window.innerWidth} height={window.innerHeight}>
-            <World>
-              <Player store={GameStore} keys={this.keyListener} />
-              <Bullet store={GameStore} />
-              <Aliens store={GameStore} />
-              <div>
-                {GameStore.score}
-              </div>
-            </World>
-          </Stage>
-        </Loop>
-    );
+    switch(GameStore.state) {
+      case "alive":
+        return (<Game store={GameStore} keyListener={this.keyListener} />);
+      case "dead":
+        return (<div>Dead</div>);
+      case "won":
+        return (<div>A winner is you!</div>);
+    }
   }
 }

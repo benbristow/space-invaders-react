@@ -5,4 +5,12 @@ html, body, #app {
   width: 100vw;
   margin: 0;
   padding: 0;
+  font-family: 'VT323', monospace;
+}
+
+.score {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  font-size: 24px;
 }

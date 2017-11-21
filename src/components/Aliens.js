@@ -31,14 +31,14 @@ export default class Aliens extends Component {
 
   resetAliens() {
     this.props.store.aliens = [];
-    for(var y = 0; y <= 3; y++) {
-      for (var x = 0 + y; x <= 10; x++) {
+    for(var y = 0; y <= 2; y++) {
+      for (var x = 0 + y; x <= 10 - y; x++) {
          this.props.store.aliens.push({ x: Config.game.alien.size * x, y: (Config.game.alien.size * y) });
       }
     }
   }
 
-  dealWithColl = () => {
+  dealWithCollision = () => {
     const { bulletPosition, aliens } = this.props.store;
     var currentAlienCount = aliens.length;
     var remainingAliens = aliens.filter((alien) => {
@@ -59,20 +59,21 @@ export default class Aliens extends Component {
   checkWin() {
     const { aliens } = this.props.store;
     if(aliens.length == 0) {
+      this.props.store.win();
     }
   }
 
   update = () => {
-    this.dealWithColl();
+    this.dealWithCollision();
     this.checkWin();
     this.props.store.moveAliens();
   }
 
   renderAliens = () => {
     const { aliens } = this.props.store;
-    return aliens.map((alien) => {
+    return aliens.map((alien, index) => {
       return (
-        <Alien x={alien.x} y={alien.y} />
+        <Alien key={index} x={alien.x} y={alien.y} />
       );
     });
   }
